@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<head>
+    <style type="text/css">
+        .input-field {
+            width: 30ch;
+            height: 1.5rem;
+        }
+    </style>
+</head>
+<h:body>
+    <div>
+        <h:link outcome="index.xhtml" style="margin-right: 1rem;">Home</h:link>
+        <h:link outcome="songs.xhtml" style="margin-right: 1rem;">Songs</h:link>
+        <h:link outcome="playlists.xhtml" style="margin-right: 1rem;">Playlists</h:link>
+        <h:link outcome="artists.xhtml" style="margin-right: 1rem;">Artists</h:link>
+    </div>
+
+    <div style="display: inline-block">
+        <h1>Edit Artist</h1>
+        <h:form>
+            <div>
+                <label for="name">Name</label> <br />
+                <h:inputText id="name" a:placeholder="The display name of the artist" styleClass="input-field" value="#{artistController.artist.name}"/>
+            </div>
+
+            <div>
+                <label for="about">About</label> <br />
+                <h:inputTextarea id="about" a:placeholder="A short description about the artist" styleClass="input-field" value="#{artistController.artist.about}"/>
+            </div>
+            <h:outputLabel value="#{artistsController.errMsg}" style="color: red"/><br />
+
+            <h:commandButton action="#{artistController.updateArtist()}" value="Update"/>
+            <h:commandButton action="#{artistController.deleteArtist()}" value="Delete"/>
+        </h:form>
+    </div>
+
+</h:body>
+</html>
