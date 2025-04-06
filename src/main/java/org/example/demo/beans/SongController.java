@@ -55,8 +55,8 @@ public class SongController {
             return;
         }
         song.setArtist(artist);
+        song = songDao.create(song);
         artist.getSongs().add(song);
-        songDao.create(song);
         artistDao.update(artist);
     }
 }

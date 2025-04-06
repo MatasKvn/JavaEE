@@ -23,4 +23,7 @@ public class Artist {
 
     @OneToMany(targetEntity = Song.class)
     private List<Song> songs;
+
+    @Version
+    private int version;
 }

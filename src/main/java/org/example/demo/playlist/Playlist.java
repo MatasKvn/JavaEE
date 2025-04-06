@@ -29,4 +29,7 @@ public class Playlist {
     @JsonbDateFormat("yyyy-MM-dd'T'HH:mm:ss")
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    @Version
+    private int version;
 }

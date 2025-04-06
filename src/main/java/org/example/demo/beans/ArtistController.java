@@ -4,11 +4,13 @@ import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import jakarta.persistence.OptimisticLockException;
 import lombok.Setter;
 import org.example.demo.artist.Artist;
 import org.example.demo.artist.ArtistDAO;
 
 import java.io.Serializable;
+import java.util.logging.Logger;
 
 @ViewScoped
 @Named
@@ -32,8 +34,18 @@ public class ArtistController implements Serializable {
         return "EditArtistForm.xhtml";
     }
 
+    // OptimisticLockException demonstration
     public void updateArtist() {
-        artistDAO.update(getArtist());
+        try {
+            Logger.getLogger(this.getClass().getName()).warning("... Updating artist " + getArtist().getName());
+            Thread.sleep(10000);
+            artistDAO.update(getArtist());
+            Logger.getLogger(this.getClass().getName()).warning("+++ Updated artist " + getArtist().getName());
+        } catch (OptimisticLockException e) {
+            Logger.getLogger(this.getClass().getName()).warning("Optimistic lock exception occurred");
+        } catch (InterruptedException e) {
+            Logger.getLogger(this.getClass().getName()).warning("Interrupted");
+        }
     }
 
     public String deleteArtist() {

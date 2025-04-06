@@ -27,4 +27,7 @@ public class Song implements Serializable {
 
     @ManyToOne(targetEntity = Artist.class)
     private Artist artist;
+
+    @Version
+    private int version;
 }

@@ -3,8 +3,10 @@ package org.example.demo.artist;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
+import org.example.demo.interceptors.PleaseLogThis;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Produces("application/json")
 @Path("/artists")
@@ -13,15 +15,16 @@ public class ArtistResource {
     @Inject
     private ArtistDAO artistDAO;
 
-
+    @PleaseLogThis
     @GET
-    public List<Artist> getArtists(long id) {
+    public List<Artist> getArtists() {
         return artistDAO.getAll();
     }
 
     @GET
     @Path("/{id}")
-    public Artist getArtist(long id) {
+    public Artist getArtist(@PathParam("id") long id) {
+        Logger.getLogger(this.getClass().getName()).warning("Called get with id: " + id);
         return artistDAO.getById(id);
     }
 
@@ -37,7 +40,7 @@ public class ArtistResource {
 
     @DELETE
     @Path("/{id}")
-    public Artist deleteArtist(long id) {
+    public Artist deleteArtist(@PathParam("id") long id) {
         return artistDAO.delete(id);
     }
 }

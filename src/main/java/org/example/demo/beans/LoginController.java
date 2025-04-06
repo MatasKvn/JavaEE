@@ -13,7 +13,7 @@ import org.example.demo.artist.ArtistDAO;
 import java.io.Serializable;
 
 @Named
-@ApplicationScoped
+@SessionScoped
 public class LoginController implements Serializable {
     public static final boolean ENABLED = true;
 
