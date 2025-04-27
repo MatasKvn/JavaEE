@@ -3,11 +3,11 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/beans_4_0.xsd"
        >
-    <interceptors>
-        <class>org.example.demo.interceptors.LoggingInterceptor</class>
-    </interceptors>
     <alternatives>
         <class>org.example.demo.song.SongDaoMybatis</class>
     </alternatives>
+    <interceptors>
+        <class>org.example.demo.interceptors.LoggingInterceptor</class>
+    </interceptors>
 </beans>
 

@@ -8,6 +8,7 @@ import jakarta.persistence.OptimisticLockException;
 import lombok.Setter;
 import org.example.demo.artist.Artist;
 import org.example.demo.artist.ArtistDAO;
+import org.example.demo.utils.AppLogger;
 
 import java.io.Serializable;
 import java.util.logging.Logger;
@@ -17,7 +18,10 @@ import java.util.logging.Logger;
 public class ArtistController implements Serializable {
 
     @Inject
-    ArtistDAO artistDAO;
+    private ArtistDAO artistDAO;
+
+    @Inject
+    private AppLogger logger;
 
     @Setter
     private Artist artist = null;
@@ -37,14 +41,14 @@ public class ArtistController implements Serializable {
     // OptimisticLockException demonstration
     public void updateArtist() {
         try {
-            Logger.getLogger(this.getClass().getName()).warning("... Updating artist " + getArtist().getName());
+            logger.log("Updating artist " + getArtist().getName());
             Thread.sleep(10000);
             artistDAO.update(getArtist());
-            Logger.getLogger(this.getClass().getName()).warning("+++ Updated artist " + getArtist().getName());
+            logger.log("Updated artist " + getArtist().getName());
         } catch (OptimisticLockException e) {
-            Logger.getLogger(this.getClass().getName()).warning("Optimistic lock exception occurred");
+            logger.log("Optimistic lock exception occurred");
         } catch (InterruptedException e) {
-            Logger.getLogger(this.getClass().getName()).warning("Interrupted");
+            logger.log("Interrupted");
         }
     }
 
