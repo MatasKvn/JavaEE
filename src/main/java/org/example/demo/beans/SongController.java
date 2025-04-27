@@ -1,6 +1,7 @@
 package org.example.demo.beans;
 
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import lombok.Getter;
@@ -10,12 +11,13 @@ import org.example.demo.artist.ArtistDAO;
 import org.example.demo.song.Song;
 import org.example.demo.song.SongDAO;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Named
-@RequestScoped
-public class SongController {
+@ViewScoped
+public class SongController implements Serializable {
     @Inject
     private SongDAO songDao;
 
