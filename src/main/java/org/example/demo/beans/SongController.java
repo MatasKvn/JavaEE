@@ -1,6 +1,5 @@
 package org.example.demo.beans;
 
-import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -8,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.example.demo.artist.Artist;
 import org.example.demo.artist.ArtistDAO;
+import org.example.demo.exceptions.HandleBackedBeanExceptions;
 import org.example.demo.song.Song;
 import org.example.demo.song.SongDAO;
 
@@ -17,6 +17,7 @@ import java.util.List;
 
 @Named
 @ViewScoped
+@HandleBackedBeanExceptions
 public class SongController implements Serializable {
     @Inject
     private SongDAO songDao;
@@ -32,7 +33,7 @@ public class SongController implements Serializable {
     private String artistName;
 
     @Getter @Setter
-    private String errorMessage = "";
+    private String errorMsg = "";
 
     public List<Song> getSongs() {
         return songDao.getAll();
@@ -53,7 +54,7 @@ public class SongController implements Serializable {
         song.setReleaseDate(LocalDateTime.now());
         Artist artist = artistDao.getByName(artistName);
         if (artist == null) {
-            setErrorMessage(String.format("Artist '%s' does not exist", artistName));
+            setErrorMsg(String.format("Artist '%s' does not exist", artistName));
             return;
         }
         song.setArtist(artist);

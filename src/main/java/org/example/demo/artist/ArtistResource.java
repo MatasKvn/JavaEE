@@ -3,7 +3,6 @@ package org.example.demo.artist;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
-import org.example.demo.interceptors.PleaseLogThis;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -15,7 +14,6 @@ public class ArtistResource {
     @Inject
     private ArtistDAO artistDAO;
 
-    @PleaseLogThis
     @GET
     public List<Artist> getArtists() {
         return artistDAO.getAll();

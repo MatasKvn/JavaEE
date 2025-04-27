@@ -7,7 +7,10 @@
         <class>org.example.demo.song.SongDaoMybatis</class>
     </alternatives>
     <interceptors>
-        <class>org.example.demo.interceptors.LoggingInterceptor</class>
+        <class>org.example.demo.exceptions.BackedBeanExceptionHandlingInterceptor</class>
     </interceptors>
+    <decorators>
+        <class>org.example.demo.song.SongDaoValidationDecorator</class>
+    </decorators>
 </beans>
 

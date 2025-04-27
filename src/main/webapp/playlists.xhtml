@@ -63,7 +63,7 @@
                 <label for="description">Description</label> <br />
                 <h:inputText id="description" value="#{playlistsController.playlistDescription}" styleClass="input-field"/>
             </div>
-            <h:outputLabel value="#{songController.errorMessage}" style="color: red"/> <br />
+            <h:outputLabel value="#{songController.errorMsg}" style="color: red"/> <br />
             <h:commandButton value="Create" action="#{playlistsController.createPlaylist()}" />
         </h:form>
     </div>

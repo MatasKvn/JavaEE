@@ -35,7 +35,7 @@
                 <label for="about">About</label> <br />
                 <h:inputTextarea id="about" a:placeholder="A short description about the artist" styleClass="input-field" value="#{artistController.artist.about}"/>
             </div>
-            <h:outputLabel value="#{artistsController.errMsg}" style="color: red"/><br />
+            <h:outputLabel value="#{artistController.errorMsg}" style="color: red"/><br />
 
             <h:commandButton action="#{artistController.updateArtist()}" value="Update"/>
             <h:commandButton action="#{artistController.deleteArtist()}" value="Delete"/>

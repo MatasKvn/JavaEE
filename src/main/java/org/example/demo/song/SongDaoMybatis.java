@@ -4,7 +4,6 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Alternative;
 import jakarta.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
-import org.example.demo.interceptors.PleaseLogThis;
 
 import java.util.List;
 
@@ -15,7 +14,6 @@ public class SongDaoMybatis implements SongDAO {
     @Inject
     private SqlSession sqlSession; // Inject MyBatis session
 
-    @PleaseLogThis
     @Override
     public List<Song> getAll() {
         return sqlSession.getMapper(SongMapper.class).getAll();

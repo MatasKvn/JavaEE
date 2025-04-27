@@ -4,17 +4,18 @@ import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import jakarta.persistence.OptimisticLockException;
+import lombok.Getter;
 import lombok.Setter;
 import org.example.demo.artist.Artist;
 import org.example.demo.artist.ArtistDAO;
+import org.example.demo.exceptions.HandleBackedBeanExceptions;
 import org.example.demo.utils.AppLogger;
 
 import java.io.Serializable;
-import java.util.logging.Logger;
 
 @ViewScoped
 @Named
+@HandleBackedBeanExceptions
 public class ArtistController implements Serializable {
 
     @Inject
@@ -25,6 +26,8 @@ public class ArtistController implements Serializable {
 
     @Setter
     private Artist artist = null;
+
+    @Getter @Setter private String errorMsg = "";
 
     public Artist getArtist() {
         if (artist == null) {
@@ -39,17 +42,16 @@ public class ArtistController implements Serializable {
     }
 
     // OptimisticLockException demonstration
-    public void updateArtist() {
+    public Artist updateArtist() {
         try {
             logger.log("Updating artist " + getArtist().getName());
             Thread.sleep(10000);
             artistDAO.update(getArtist());
             logger.log("Updated artist " + getArtist().getName());
-        } catch (OptimisticLockException e) {
-            logger.log("Optimistic lock exception occurred");
         } catch (InterruptedException e) {
-            logger.log("Interrupted");
+            // Should never happen
         }
+        return null;
     }
 
     public String deleteArtist() {

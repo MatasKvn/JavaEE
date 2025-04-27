@@ -1,4 +1,4 @@
-package org.example.demo.interceptors;
+package org.example.demo.exceptions;
 
 import jakarta.interceptor.InterceptorBinding;
 
@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
 @InterceptorBinding
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.TYPE, ElementType.METHOD })
-public @interface PleaseLogThis {
+public @interface HandleBackedBeanExceptions {
 }
