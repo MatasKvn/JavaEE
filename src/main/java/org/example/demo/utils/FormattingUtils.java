@@ -1,7 +1,7 @@
 package org.example.demo.utils;
 
 public final class FormattingUtils {
-    public static String getShortClassName(Class type) {
+    public static String getShortClassName(Class<?> type) {
         try {
             String[] pathSequence = type
                     .getName()

@@ -11,12 +11,10 @@ import org.example.demo.song.Song;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import org.example.demo.song.SongDAO;
 import org.example.demo.song.SongDaoJpa;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.lang.reflect.Field;
 
 @ApplicationScoped
 public class MyBatisProducer {

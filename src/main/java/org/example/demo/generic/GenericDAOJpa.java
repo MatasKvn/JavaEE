@@ -6,11 +6,11 @@ import jakarta.persistence.EntityTransaction;
 
 import java.util.List;
 
-public abstract class GenericDAO<T> implements DAO<T> {
+public abstract class GenericDAOJpa<T> implements DAO<T> {
 
     protected Class<T> type;
 
-    public GenericDAO(Class<T> type) {
+    public GenericDAOJpa(Class<T> type) {
         this.type = type;
     }
 
@@ -28,19 +28,30 @@ public abstract class GenericDAO<T> implements DAO<T> {
     }
 
     @Override
-    public T create(T T) {
+    public T create(T t) {
         em.getTransaction().begin();
-        em.persist(T);
+        em.persist(t);
         em.getTransaction().commit();
-        return T;
+        return t;
     }
 
     @Override
-    public T update(T T) {
+    public T update(T t) {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
-        T updatedT = em.merge(T);
+        T updatedT = em.merge(t);
         tx.commit();
         return updatedT;
+    }
+
+    @Override
+    public T delete(long id) {
+        em.getTransaction().begin();
+        T t = em.find(type, id);
+        if (t != null) {
+            em.remove(t);
+        }
+        em.getTransaction().commit();
+        return t;
     }
 }

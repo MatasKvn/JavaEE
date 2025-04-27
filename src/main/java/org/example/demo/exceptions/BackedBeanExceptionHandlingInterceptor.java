@@ -1,6 +1,5 @@
 package org.example.demo.exceptions;
 
-import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.inject.Inject;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
@@ -10,7 +9,6 @@ import org.example.demo.utils.AppLogger;
 import org.example.demo.utils.FormattingUtils;
 
 import java.io.Serializable;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -23,7 +21,7 @@ public class BackedBeanExceptionHandlingInterceptor implements Serializable {
     private AppLogger logger;
 
     @AroundInvoke
-    public Object handleExceptions(InvocationContext context) {
+    public Object handleExceptions(InvocationContext context) throws Exception {
         try {
             return context.proceed();
         } catch (OptimisticLockException e) {
@@ -33,6 +31,7 @@ public class BackedBeanExceptionHandlingInterceptor implements Serializable {
         } catch (Exception e) {
             setErrorMsg(context.getTarget(), "An unknown error occurred.");
             logger.log("Unhandled exception: " + e.getMessage());
+            throw e;
         }
         return null;
     }

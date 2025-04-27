@@ -21,7 +21,7 @@ public class Artist {
 
     private String about;
 
-    @OneToMany(targetEntity = Song.class)
+    @OneToMany(targetEntity = Song.class, mappedBy = "artist")
     private List<Song> songs;
 
     @Version

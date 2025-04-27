@@ -4,7 +4,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.example.demo.artist.Artist;
-import org.example.demo.artist.ArtistDAO;
 import org.example.demo.artist.ArtistDaoJpa;
 
 import java.lang.reflect.Field;

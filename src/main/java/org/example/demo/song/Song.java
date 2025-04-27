@@ -4,9 +4,11 @@ import jakarta.json.bind.annotation.JsonbDateFormat;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.demo.artist.Artist;
+import org.example.demo.playlist.Playlist;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter @Setter @NoArgsConstructor @EqualsAndHashCode @ToString
@@ -27,6 +29,14 @@ public class Song implements Serializable {
 
     @ManyToOne(targetEntity = Artist.class)
     private Artist artist;
+
+    @ManyToMany(targetEntity = Playlist.class, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "playlist_song",
+            joinColumns = @JoinColumn(name = "song_id"),
+            inverseJoinColumns = @JoinColumn(name = "playlist_id")
+    )
+    private List<Playlist> playlists;
 
     @Version
     private int version;
