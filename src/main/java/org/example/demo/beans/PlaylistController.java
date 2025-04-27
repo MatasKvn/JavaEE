@@ -71,6 +71,8 @@ public class PlaylistController implements Serializable {
 
     public List<Song> getAvailableSongs() {
         Playlist playlist = getPlaylist();
-        return songDAO.getAll().stream().filter(song -> !playlist.getSongs().contains(song)).toList();
+        return songDAO.getAll().stream()
+                .filter(song -> playlist.getSongs().stream().noneMatch(s -> s.getId() == song.getId()))
+                .toList();
     }
 }
