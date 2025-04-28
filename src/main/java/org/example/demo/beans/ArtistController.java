@@ -6,12 +6,14 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
+import org.example.demo.HeavyCalc;
 import org.example.demo.artist.Artist;
 import org.example.demo.artist.ArtistDAO;
 import org.example.demo.exceptions.HandleBackedBeanExceptions;
 import org.example.demo.utils.AppLogger;
 
 import java.io.Serializable;
+import java.util.concurrent.ExecutionException;
 
 @ViewScoped
 @Named
@@ -23,6 +25,9 @@ public class ArtistController implements Serializable {
 
     @Inject
     private AppLogger logger;
+
+    @Inject
+    private HeavyCalc heavyCalc;
 
     @Setter
     private Artist artist = null;
@@ -45,11 +50,15 @@ public class ArtistController implements Serializable {
     public Artist updateArtist() {
         try {
             logger.log("Updating artist " + getArtist().getName());
-            Thread.sleep(10000);
+//            Thread.sleep(10000);
+            String calcResult = heavyCalc.heavyCalculation().get();
+            logger.log("Heavy calculation done: " + calcResult);
             artistDAO.update(getArtist());
             logger.log("Updated artist " + getArtist().getName());
         } catch (InterruptedException e) {
             // Should never happen
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
         }
         return null;
     }
