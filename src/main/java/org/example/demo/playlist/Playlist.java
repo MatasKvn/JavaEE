@@ -23,7 +23,7 @@ public class Playlist {
 
     private String description;
 
-    @ManyToMany(targetEntity = Song.class)
+    @ManyToMany(targetEntity = Song.class, mappedBy = "playlists")
     private List<Song> songs;
 
     @JsonbDateFormat("yyyy-MM-dd'T'HH:mm:ss")
